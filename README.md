@@ -8,7 +8,8 @@ A phone app (installable web app) that says Thai out loud in a male voice. Type 
 - **English in → Thai out.** English is matched against the phrasebook and your saved phrases first. For anything else, download the optional offline translator (about 40 MB) — Mozilla's Firefox English→Thai model, running on the phone.
 - **Tone-coloured romanisation** under every phrase (Paiboon-style), with a little pitch line showing each tone.
 - **Slow** replay and **Shadow** mode: it plays the phrase, gives you time to say it back, and repeats.
-- **Phrasebook** of ~70 casual, male-register phrases, with audio built in so they play instantly.
+- **Phrasebook** of ~120 everyday spoken phrases for talking with your partner (short forms like หลับสบายมั้ย, not textbook Thai), with audio built in so they play instantly.
+- **Names:** set what you call her and yourself in Settings; every phrase and translation uses them.
 - **Saved** list with import: paste lines of `English | Thai` (e.g. phrases Claude writes for you).
 
 ## Put it online (GitHub Pages)

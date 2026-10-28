@@ -47,9 +47,16 @@ const CONTOUR = {
 };
 
 // ---------- state ----------
-const settings = Object.assign({ slow: 1.6, rounds: 3, male: true }, store.get('tv.settings', {}));
+const settings = Object.assign({ slow: 1.6, rounds: 3, male: true, her: TT.DEFAULT_NAMES.her, me: TT.DEFAULT_NAMES.me }, store.get('tv.settings', {}));
+const names = () => ({ her: settings.her || TT.DEFAULT_NAMES.her, me: settings.me || TT.DEFAULT_NAMES.me });
 let saved = store.get('tv.saved', []);
+let rawPhrasebook = { categories: [] };
 let phrasebook = { categories: [] };
+// Put the chosen names into every phrase ({her}, {me})
+function applyNames() {
+  const n = names();
+  phrasebook = { ...rawPhrasebook, categories: rawPhrasebook.categories.map((c) => ({ ...c, phrases: c.phrases.map((p) => ({ ...p, th: TT.fill(p.th, n) })) })) };
+}
 let translatorInstalled = store.get('tv.translator2', false);
 
 // ---------- voice (worker) ----------
@@ -324,7 +331,7 @@ async function onSay(e) {
   $('#result').replaceChildren(status);
   try {
     let th = TT.cleanThai(await translate(text));
-    if (settings.male) th = TT.maleSpeech(th);
+    if (settings.male) th = TT.casualise(th, names());
     renderResult({ th, en: text, source: 'Offline translator', warn: 'Machine translation — check important things with a native speaker', alts: matches });
     safePlay(th, false, document.querySelector('.ctl.play'));
   } catch (err) {
@@ -404,6 +411,11 @@ function openSettings() {
   $('#slowRange').value = settings.slow; $('#slowVal').textContent = `${settings.slow}× slower`;
   $('#shadowRange').value = settings.rounds; $('#shadowVal').textContent = `${settings.rounds} rounds`;
   $('#maleToggle').checked = settings.male;
+  const herPreset = [...$('#herSel').options].some((o) => o.value === settings.her);
+  $('#herSel').value = herPreset ? settings.her : '__custom';
+  $('#herCustom').hidden = herPreset;
+  $('#herCustom').value = herPreset ? '' : settings.her;
+  $('#meSel').value = settings.me;
   renderTranslatorStatus();
   navigator.storage?.estimate?.().then((e) => { $('#storageInfo').textContent = `Using ${MB(e.usage || 0)} on this phone.`; }).catch(() => {});
   $('#settings').showModal();
@@ -456,6 +468,18 @@ async function boot() {
   $('#slowRange').addEventListener('input', (e) => { settings.slow = +(+e.target.value).toFixed(1); $('#slowVal').textContent = `${settings.slow}× slower`; saveSettings(); });
   $('#shadowRange').addEventListener('input', (e) => { settings.rounds = +e.target.value; $('#shadowVal').textContent = `${settings.rounds} rounds`; saveSettings(); });
   $('#maleToggle').addEventListener('change', (e) => { settings.male = e.target.checked; saveSettings(); });
+  const namesChanged = () => { saveSettings(); applyNames(); renderPhrases(); };
+  $('#herSel').addEventListener('change', (e) => {
+    const custom = e.target.value === '__custom';
+    $('#herCustom').hidden = !custom;
+    if (custom) { $('#herCustom').focus(); return; }
+    settings.her = e.target.value; namesChanged();
+  });
+  $('#herCustom').addEventListener('input', (e) => {
+    const v = e.target.value.trim();
+    if (v && TT.hasThai(v)) { settings.her = TT.cleanThai(v); namesChanged(); }
+  });
+  $('#meSel').addEventListener('change', (e) => { settings.me = e.target.value; namesChanged(); });
   $('#trInstall').addEventListener('click', installTranslator);
   $('#trRemove').addEventListener('click', async () => {
     if (!confirm('Remove the translator from this phone? You can download it again later.')) return;
@@ -490,7 +514,8 @@ async function boot() {
   ]);
   if (pre) prerendered = pre;
   TT.loadLexiconText(lex);
-  phrasebook = pb;
+  rawPhrasebook = pb;
+  applyNames();
   renderLegend();
   renderPhrases();
   renderSaved();

@@ -42,7 +42,7 @@
         <p>Try one, or paste some Thai:</p>
         <div class="chips">
           <button type="button" class="chip">I miss you</button>
-          <button type="button" class="chip">Have you eaten yet?</button>
+          <button type="button" class="chip">Have you eaten?</button>
           <button type="button" class="chip">You're so cute</button>
         </div>
       </div>
@@ -97,8 +97,29 @@
         <input type="range" id="shadowRange" min="2" max="6" step="1">
         <span id="shadowVal" class="val"></span>
       </div>
+      <h3>Names</h3>
+      <div class="setting select">
+        <label for="herSel">What you call her</label>
+        <select id="herSel">
+          <option value="สีดา">สีดา · sǐi-daa</option>
+          <option value="ที่รัก">ที่รัก · tîi-rák (darling)</option>
+          <option value="ตัวเอง">ตัวเอง · dtua-eeng (couple “you”)</option>
+          <option value="เธอ">เธอ · təə (“you”)</option>
+          <option value="__custom">Something else…</option>
+        </select>
+      </div>
+      <input id="herCustom" class="search" type="text" lang="th" placeholder="Type it in Thai" hidden>
+      <div class="setting select">
+        <label for="meSel">What you call yourself</label>
+        <select id="meSel">
+          <option value="ผม">ผม · pǒm</option>
+          <option value="เค้า">เค้า · káo (soft, couple talk)</option>
+          <option value="เรา">เรา · rao</option>
+        </select>
+      </div>
+      <p class="small muted">Every phrase uses these. Thai couples use names more than “I” and “you”.</p>
       <div class="setting toggle">
-        <label for="maleToggle">Male speech for translations<br><small>Swaps ฉัน → ผม and ค่ะ → ครับ</small></label>
+        <label for="maleToggle">Casual style for translations<br><small>Uses your names, มั้ย, ยัง, ยังไง instead of textbook forms</small></label>
         <input type="checkbox" id="maleToggle">
       </div>
 

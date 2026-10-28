@@ -1,7 +1,7 @@
 // Offline support. App files are pre-cached; everything else from this site
 // (voice runtime, translator runtime) is cached the first time it's used.
 // The voice model itself is cached by the voice worker in 'tv-model-1'.
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SHELL = `tv-shell-${VERSION}`;
 const RUNTIME = 'tv-runtime';
 const TRANSLATOR = 'tv-translator-1';

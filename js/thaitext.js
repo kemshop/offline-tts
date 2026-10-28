@@ -31,6 +31,8 @@ const EXTRA = [
   ['สนุก', 'sa?2 nuk2'],
   ['สะดวก', 'sa?2 dRk2'],
   ['ยังเลย', 'jaN1 lZj1'],
+  ['เค้า', 'Kaw4'],
+  ['แป๊บ', 'pyp4'],
   ['สุขสันต์', 'suk2 san5'],
   ['เซอร์ไพรส์', 'sZ-1 Praj1'],
   ['โอเค', '?O-1 KE-1'],
@@ -216,4 +218,45 @@ export function maleSpeech(text) {
   return segment(text)
     .map((tk) => (tk.thai && MALE_SWAP.has(tk.t) ? MALE_SWAP.get(tk.t) : tk.t))
     .join('');
+}
+
+// ---------- names and casual speech ----------
+export const DEFAULT_NAMES = { her: 'สีดา', me: 'ผม' };
+export function fill(th, names = DEFAULT_NAMES) {
+  return th.replaceAll('{her}', names.her || DEFAULT_NAMES.her).replaceAll('{me}', names.me || DEFAULT_NAMES.me);
+}
+
+// Turn translator Thai into how people actually talk: shorter question forms,
+// ไหม said as มั้ย, food/eat in everyday words, and names instead of pronouns.
+const PHRASE_SWAPS = [
+  ['รับประทาน', 'กิน'],
+  ['ทานอาหาร', 'กินข้าว'],
+  ['กินอาหาร', 'กินข้าว'],
+  ['นอนหลับสบาย', 'หลับสบาย'],
+  ['เป็นอย่างไรบ้าง', 'เป็นไงบ้าง'],
+  ['เป็นอย่างไร', 'เป็นไง'],
+  ['อย่างไร', 'ยังไง'],
+  ['หรือเปล่า', 'รึเปล่า'],
+  ['หรือไม่', 'มั้ย'],
+  ['หรือยัง', 'ยัง'],
+];
+export function casualise(text, names = DEFAULT_NAMES) {
+  let t = cleanThai(text);
+  for (const [a, b] of PHRASE_SWAPS) t = t.split(a).join(b);
+  const her = names.her || DEFAULT_NAMES.her;
+  const me = names.me || DEFAULT_NAMES.me;
+  const swap = new Map([
+    ['ไหม', 'มั้ย'], ['ทาน', 'กิน'],
+    ['ฉัน', me], ['ดิฉัน', me], ['ผม', me],
+    ['คุณ', her], ['เธอ', her],
+    ['ค่ะ', ''], ['คะ', ''],
+  ]);
+  const toks = segment(t).map((tk) => (tk.thai && swap.has(tk.t) ? { ...tk, t: swap.get(tk.t) } : tk));
+  // Machine translation sometimes doubles a word ("วันนี้วันนี้") — drop the repeat
+  return toks
+    .filter((tk, i) => !(i > 0 && tk.thai && tk.known && tk.t.length >= 4 && tk.t === toks[i - 1].t))
+    .map((tk) => tk.t)
+    .join('')
+    .replace(/\s+/g, ' ')
+    .trim();
 }

@@ -1,103 +1,161 @@
 {
-  "version": 1,
+  "version": 2,
+  "about": "Everyday spoken Thai between a couple. {her} = what you call her, {me} = what you call yourself (set in Settings).",
   "categories": [
     {
-      "name": "Basics",
+      "name": "Little words",
       "phrases": [
-        { "en": "Hello", "th": "สวัสดีครับ", "note": "ครับ (kráp) makes anything polite. Men use ครับ, women use ค่ะ." },
-        { "en": "Thank you", "th": "ขอบคุณครับ" },
-        { "en": "Sorry / excuse me", "th": "ขอโทษครับ" },
-        { "en": "No worries, it's fine", "th": "ไม่เป็นไรครับ" },
-        { "en": "Yes", "th": "ครับ", "note": "On its own, ครับ works as a polite yes." },
-        { "en": "No", "th": "ไม่ครับ" },
-        { "en": "OK", "th": "โอเคครับ" },
-        { "en": "I don't know", "th": "ไม่รู้ครับ" },
-        { "en": "I understand", "th": "เข้าใจแล้วครับ" },
-        { "en": "I don't understand", "th": "ไม่เข้าใจครับ" },
+        { "en": "Yeah / mm-hm", "th": "อือ", "note": "The everyday 'yes' between people who are close. Said with a soft, low hum." },
+        { "en": "OK, sure", "th": "ได้เลย" },
+        { "en": "Yes, dear", "th": "จ้า", "note": "A warm, sing-song 'yes'. Sweet between couples." },
+        { "en": "No", "th": "ไม่อะ" },
         { "en": "Really?", "th": "จริงเหรอ" },
-        { "en": "Me too", "th": "ผมก็เหมือนกัน" }
+        { "en": "Seriously!", "th": "จริงดิ" },
+        { "en": "Oh, I see", "th": "อ๋อ" },
+        { "en": "Me too", "th": "เหมือนกัน" },
+        { "en": "No worries", "th": "ไม่เป็นไร" },
+        { "en": "Wait a sec", "th": "แป๊บนึง" },
+        { "en": "Thank you", "th": "ขอบคุณนะ" },
+        { "en": "Sorry", "th": "ขอโทษนะ" },
+        { "en": "Never mind", "th": "ช่างมันเถอะ" },
+        { "en": "Just kidding", "th": "ล้อเล่น" },
+        { "en": "Of course", "th": "แน่นอน" }
       ]
     },
     {
-      "name": "Learning helpers",
+      "name": "When you don't understand",
       "phrases": [
-        { "en": "Can you speak slowly?", "th": "พูดช้าๆ ได้ไหมครับ" },
-        { "en": "Can you say it again?", "th": "พูดอีกทีได้ไหมครับ" },
-        { "en": "What does this mean?", "th": "อันนี้แปลว่าอะไรครับ" },
-        { "en": "How do you say this in Thai?", "th": "อันนี้ภาษาไทยพูดว่าอะไรครับ" },
-        { "en": "Did I say it right?", "th": "ผมพูดถูกไหมครับ" },
-        { "en": "I'm learning Thai", "th": "ผมกำลังเรียนภาษาไทยครับ" },
-        { "en": "I can speak a little Thai", "th": "ผมพูดภาษาไทยได้นิดหน่อยครับ" },
-        { "en": "Thai is hard but fun", "th": "ภาษาไทยยากแต่สนุกครับ" }
+        { "en": "What did you say?", "th": "อะไรนะ" },
+        { "en": "I don't understand", "th": "ไม่เข้าใจอะ" },
+        { "en": "Say it again?", "th": "พูดอีกทีได้มั้ย" },
+        { "en": "Slowly please", "th": "พูดช้าๆ หน่อยนะ" },
+        { "en": "Can you say it simply?", "th": "พูดง่ายๆ ได้มั้ย" },
+        { "en": "What does that mean?", "th": "แปลว่าอะไร" },
+        { "en": "How do you say this at home?", "th": "ภาษาบ้านพูดว่ายังไง", "note": "Asks for her home dialect, not standard Thai." },
+        { "en": "Did I say it right?", "th": "{me}พูดถูกมั้ย" },
+        { "en": "Teach me", "th": "สอน{me}หน่อย" }
       ]
     },
     {
-      "name": "Sweet things",
+      "name": "Morning and night",
       "phrases": [
-        { "en": "I love you", "th": "ผมรักคุณนะ", "note": "ผม (pǒm) is 'I' for a man. นะ (ná) softens it — warmer than ครับ here." },
-        { "en": "I miss you", "th": "ผมคิดถึงคุณนะ" },
-        { "en": "Miss you (short, casual)", "th": "คิดถึงนะ" },
-        { "en": "Do you miss me?", "th": "คิดถึงผมไหม" },
-        { "en": "You're beautiful", "th": "คุณสวยมาก" },
-        { "en": "You're so cute", "th": "คุณน่ารักมาก" },
-        { "en": "I want to see you", "th": "ผมอยากเจอคุณ" },
-        { "en": "I'm so happy to be with you", "th": "ผมมีความสุขมากที่ได้อยู่กับคุณ" },
-        { "en": "You make me happy", "th": "คุณทำให้ผมมีความสุข" },
-        { "en": "I'm learning Thai for you", "th": "ผมเรียนภาษาไทยเพื่อคุณ" },
-        { "en": "Surprise!", "th": "เซอร์ไพรส์" },
-        { "en": "Come here, give me a hug", "th": "มากอดหน่อย" },
-        { "en": "Take care of yourself", "th": "ดูแลตัวเองด้วยนะ" },
-        { "en": "Good morning", "th": "อรุณสวัสดิ์ครับ" },
-        { "en": "Good night, sweet dreams", "th": "ฝันดีนะครับ" }
+        { "en": "Good morning", "th": "มอนิ่ง", "note": "Borrowed from English and what most Thai couples actually say." },
+        { "en": "Are you awake?", "th": "ตื่นยัง" },
+        { "en": "I'm up", "th": "ตื่นแล้ว" },
+        { "en": "Did you sleep well?", "th": "หลับสบายมั้ย", "note": "Casual form of นอนหลับสบายไหม. ไหม is said 'mái', which is why people write มั้ย." },
+        { "en": "I slept well", "th": "หลับสบายดี" },
+        { "en": "I couldn't sleep", "th": "นอนไม่ค่อยหลับ" },
+        { "en": "I dreamt of you", "th": "ฝันถึง{her}เลย" },
+        { "en": "I'm sleepy", "th": "ง่วงแล้ว" },
+        { "en": "Go to sleep now", "th": "นอนได้แล้วนะ" },
+        { "en": "Sweet dreams", "th": "ฝันดีนะ" },
+        { "en": "Talk tomorrow", "th": "พรุ่งนี้คุยกันนะ" }
       ]
     },
     {
       "name": "Checking in",
       "phrases": [
-        { "en": "Have you eaten yet?", "th": "กินข้าวหรือยัง", "note": "A classic Thai way of saying 'I care about you'." },
-        { "en": "I've eaten already", "th": "ผมกินแล้ว" },
+        { "en": "Have you eaten?", "th": "กินข้าวยัง", "note": "The classic Thai 'I care about you'. Casual form of กินข้าวหรือยัง." },
+        { "en": "I've eaten", "th": "กินแล้ว" },
         { "en": "Not yet", "th": "ยังเลย" },
-        { "en": "How are you?", "th": "เป็นยังไงบ้าง" },
-        { "en": "I'm good", "th": "ผมสบายดี" },
-        { "en": "Are you tired?", "th": "เหนื่อยไหม" },
-        { "en": "I'm tired today", "th": "วันนี้ผมเหนื่อย" },
-        { "en": "Is something wrong?", "th": "เป็นอะไรหรือเปล่า" },
-        { "en": "Don't worry", "th": "ไม่ต้องห่วงนะ" },
-        { "en": "What are you doing?", "th": "ทำอะไรอยู่" },
-        { "en": "Where are you?", "th": "อยู่ที่ไหน" },
-        { "en": "What time do you finish work?", "th": "เลิกงานกี่โมง" },
-        { "en": "Did you sleep well?", "th": "นอนหลับสบายไหม" },
-        { "en": "I'll call you later", "th": "เดี๋ยวผมโทรหานะ" }
+        { "en": "How are you?", "th": "เป็นไงบ้าง" },
+        { "en": "What are you doing?", "th": "ทำไรอยู่" },
+        { "en": "Where are you?", "th": "อยู่ไหน" },
+        { "en": "Are you tired?", "th": "เหนื่อยมั้ย" },
+        { "en": "Busy day?", "th": "วันนี้ลูกค้าเยอะมั้ย", "note": "Literally 'lots of customers today?'" },
+        { "en": "Are you sore?", "th": "ปวดเมื่อยมั้ย" },
+        { "en": "Finished work yet?", "th": "เลิกงานยัง" },
+        { "en": "Home yet?", "th": "ถึงบ้านยัง" },
+        { "en": "Tell me when you get there", "th": "ถึงแล้วบอกด้วยนะ" },
+        { "en": "Is something wrong?", "th": "เป็นอะไรรึเปล่า" },
+        { "en": "Are you sick?", "th": "ไม่สบายเหรอ" },
+        { "en": "Get some rest", "th": "พักบ้างนะ" },
+        { "en": "Take care of yourself", "th": "ดูแลตัวเองด้วยนะ" }
       ]
     },
     {
-      "name": "Out and about",
+      "name": "Missing you",
       "phrases": [
-        { "en": "I'm on my way", "th": "ผมกำลังไปแล้วนะ" },
-        { "en": "I'm home", "th": "ผมถึงบ้านแล้ว" },
-        { "en": "Wait a moment", "th": "รอแป๊บนึงนะ" },
-        { "en": "Drive safely", "th": "ขับรถดีๆ นะ" },
-        { "en": "See you tomorrow", "th": "เจอกันพรุ่งนี้นะ" },
+        { "en": "Miss you", "th": "คิดถึงนะ" },
+        { "en": "I miss you (so much)", "th": "คิดถึง{her}มากเลย" },
+        { "en": "Do you miss me?", "th": "คิดถึง{me}มั้ย" },
+        { "en": "I want to see you", "th": "อยากเจอแล้ว" },
+        { "en": "I want to hug you", "th": "อยากกอดจัง" },
+        { "en": "When will we see each other?", "th": "เมื่อไหร่จะได้เจอกัน" },
+        { "en": "Not long now", "th": "อีกไม่นานแล้วนะ" },
+        { "en": "Call me when you're free", "th": "ว่างแล้วโทรมานะ" },
+        { "en": "I'll call you later", "th": "เดี๋ยวโทรหานะ" }
+      ]
+    },
+    {
+      "name": "Love",
+      "phrases": [
+        { "en": "Love you", "th": "รักนะ" },
+        { "en": "I love you", "th": "รัก{her}นะ" },
+        { "en": "I only love you", "th": "รัก{her}คนเดียว" },
+        { "en": "I'll choose you every time", "th": "{me}เลือก{her}ทุกครั้ง" },
+        { "en": "I'm not going anywhere", "th": "{me}ไม่ไปไหนหรอก" },
+        { "en": "You matter so much to me", "th": "{her}สำคัญกับ{me}มากนะ" },
+        { "en": "I'm happy with you", "th": "อยู่กับ{her}แล้วมีความสุข" },
+        { "en": "You're so cute", "th": "น่ารักจัง" },
+        { "en": "You're beautiful", "th": "สวยจัง" },
+        { "en": "I love your smile", "th": "ชอบเวลา{her}ยิ้ม" },
+        { "en": "Give me a hug", "th": "ขอกอดหน่อย" },
+        { "en": "Kisses", "th": "จุ๊บๆ" },
+        { "en": "I'm learning Thai for you", "th": "{me}เรียนภาษาไทยเพื่อ{her}" },
+        { "en": "I want to talk with you in Thai", "th": "{me}อยากคุยกับ{her}เป็นภาษาไทย" },
+        { "en": "Surprise!", "th": "เซอร์ไพรส์" }
+      ]
+    },
+    {
+      "name": "Food and going out",
+      "phrases": [
+        { "en": "Hungry yet?", "th": "หิวยัง" },
+        { "en": "I'm hungry", "th": "หิวแล้ว" },
         { "en": "What do you want to eat?", "th": "อยากกินอะไร" },
+        { "en": "Anything's fine", "th": "อะไรก็ได้" },
         { "en": "Let's go eat", "th": "ไปกินข้าวกัน" },
-        { "en": "I'm hungry", "th": "ผมหิวแล้ว" },
-        { "en": "I'm sleepy", "th": "ผมง่วงแล้ว" },
         { "en": "Delicious!", "th": "อร่อยมาก" },
-        { "en": "Not too spicy, please", "th": "ไม่เผ็ดมากนะครับ" },
-        { "en": "How much is this?", "th": "อันนี้เท่าไหร่ครับ" }
+        { "en": "You're a great cook", "th": "{her}ทำอาหารอร่อยมาก" },
+        { "en": "Not too spicy", "th": "ไม่เอาเผ็ดมากนะ" },
+        { "en": "I'm full", "th": "อิ่มแล้ว" },
+        { "en": "Let's go out", "th": "ไปเที่ยวกัน" },
+        { "en": "Are you free Saturday?", "th": "วันเสาร์ว่างมั้ย" },
+        { "en": "I'll come pick you up", "th": "เดี๋ยวไปรับนะ" },
+        { "en": "On my way", "th": "กำลังไป" },
+        { "en": "I'm here", "th": "ถึงแล้ว" },
+        { "en": "Drive safe", "th": "ขับรถดีๆ นะ" },
+        { "en": "See you tomorrow", "th": "เจอกันพรุ่งนี้นะ" }
       ]
     },
     {
-      "name": "Feelings",
+      "name": "Talking things through",
       "phrases": [
-        { "en": "I'm glad", "th": "ผมดีใจ" },
-        { "en": "That's great!", "th": "ดีมากเลย" },
-        { "en": "That's so funny", "th": "ตลกมาก" },
-        { "en": "I'm sorry (sincere)", "th": "ผมขอโทษนะ" },
-        { "en": "Of course", "th": "แน่นอน" },
-        { "en": "Maybe", "th": "อาจจะ" },
-        { "en": "I'm not sure", "th": "ไม่แน่ใจ" },
-        { "en": "Happy birthday", "th": "สุขสันต์วันเกิดนะ" }
+        { "en": "You can tell me anything", "th": "บอก{me}ได้ทุกเรื่องนะ" },
+        { "en": "If something's up, tell me", "th": "มีอะไรก็บอกนะ" },
+        { "en": "I won't be angry", "th": "{me}ไม่โกรธหรอก" },
+        { "en": "I'm not angry", "th": "ไม่ได้โกรธนะ" },
+        { "en": "Let's talk", "th": "คุยกันหน่อยนะ" },
+        { "en": "I understand", "th": "{me}เข้าใจ" },
+        { "en": "I worry about you", "th": "เป็นห่วงนะ" },
+        { "en": "It's OK, I'm right here", "th": "ไม่เป็นไรนะ {me}อยู่ตรงนี้" },
+        { "en": "I'm sorry I upset you", "th": "ขอโทษนะที่ทำให้เสียใจ" },
+        { "en": "Don't be scared", "th": "ไม่ต้องกลัวนะ" }
+      ]
+    },
+    {
+      "name": "Teasing and making up",
+      "phrases": [
+        { "en": "Are you sulking?", "th": "งอนเหรอ", "note": "งอน is the playful sulk of someone who wants to be won back. Very Thai." },
+        { "en": "Don't sulk", "th": "อย่างอนนะ" },
+        { "en": "I'm winning you back", "th": "ง้อแล้วนะ", "note": "ง้อ is coaxing someone out of a sulk." },
+        { "en": "Done sulking yet?", "th": "หายงอนยัง" },
+        { "en": "You're so cheeky", "th": "ซนจัง" },
+        { "en": "You're so clingy (in a cute way)", "th": "ขี้อ้อนจัง" },
+        { "en": "I'm shy", "th": "เขินอะ" },
+        { "en": "Just teasing", "th": "แกล้งเล่นเฉยๆ" },
+        { "en": "That's so funny", "th": "ตลกอะ" },
+        { "en": "Why are you laughing?", "th": "หัวเราะทำไม" }
       ]
     }
   ]
