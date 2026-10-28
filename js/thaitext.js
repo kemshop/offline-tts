@@ -124,8 +124,11 @@ export function numberToThai(n) {
 }
 
 // ---------- normalisation for speech ----------
+// Some sources write ำ as ํ + า; store it the standard way so the dictionary finds it
+export const cleanThai = (text) => text.normalize('NFC').replace(/\u0E4D\u0E32/g, '\u0E33');
+
 export function normaliseForSpeech(text) {
-  let t = text.normalize('NFC');
+  let t = cleanThai(text);
   // Thai digits → Arabic digits
   t = t.replace(/[๐-๙]/g, (c) => String(c.charCodeAt(0) - 0x0E50));
   t = t.replace(/\d[\d,]*/g, (d) => {

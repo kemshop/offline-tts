@@ -1,9 +1,10 @@
 // Offline support. App files are pre-cached; everything else from this site
 // (voice runtime, translator runtime) is cached the first time it's used.
 // The voice model itself is cached by the voice worker in 'tv-model-1'.
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = `tv-shell-${VERSION}`;
 const RUNTIME = 'tv-runtime';
+const TRANSLATOR = 'tv-translator-1';
 
 const SHELL_FILES = [
   './',
@@ -13,6 +14,7 @@ const SHELL_FILES = [
   'js/app.js',
   'js/thaitext.js',
   'js/translate.js',
+  'js/translate-worker.js',
   'js/tts-worker.js',
   'data/lexicon.tsv',
   'data/phrasebook.json',
@@ -33,12 +35,13 @@ const SHELL_FILES = [
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(SHELL);
-    await c.addAll(SHELL_FILES);
+    // cache: 'reload' skips the browser's HTTP cache so an update never stores old files
+    await c.addAll(SHELL_FILES.map((u) => new Request(u, { cache: 'reload' })));
     // Pre-rendered phrasebook audio (small) so the phrasebook works offline straight away
     try {
       const idx = await (await fetch('data/phrase-audio.json')).json();
       const urls = Object.values(idx.files).flatMap((f) => [`${f}-n.ogg`, `${f}-s.ogg`]);
-      await c.addAll(urls);
+      await c.addAll(urls.map((u) => new Request(u, { cache: 'reload' })));
     } catch { /* phrasebook audio falls back to the live voice */ }
     await self.skipWaiting();
   })());
@@ -58,6 +61,8 @@ self.addEventListener('activate', (e) => {
   e.waitUntil((async () => {
     for (const k of await caches.keys()) {
       if (k.startsWith('tv-shell-') && k !== SHELL) await caches.delete(k);
+      // v1 shipped a 900 MB translator that crashed phones — reclaim the space
+      if (k === 'transformers-cache' || k === RUNTIME) await caches.delete(k);
     }
     await self.clients.claim();
   })());
@@ -69,6 +74,19 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return; // e.g. Hugging Face — the translator caches those itself
   if (url.pathname.includes('/model/') && url.pathname.includes('.part')) return; // worker caches these itself
+
+  // Translator files: kept in their own cache so "Remove translator" can drop them
+  if (url.pathname.includes('/translator/')) {
+    e.respondWith(isolate_((async () => {
+      const cache = await caches.open(TRANSLATOR);
+      const hit = await cache.match(req, { ignoreSearch: true });
+      if (hit) return hit;
+      const res = await fetch(req);
+      if (res.ok) await cache.put(req, res.clone()).catch(() => {});
+      return res;
+    })()));
+    return;
+  }
 
   e.respondWith(isolate_((async () => {
     const shell = await caches.open(SHELL);

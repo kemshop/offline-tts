@@ -1,0 +1,32 @@
+{
+ "pair": "en-th",
+ "modelVersion": "2.0",
+ "runtime": "bergamot v0.6.0",
+ "files": [
+  {
+   "role": "glue",
+   "path": "bergamot-translator.js",
+   "bytes": 100187
+  },
+  {
+   "role": "wasm",
+   "path": "bergamot-translator.wasm",
+   "bytes": 4960506
+  },
+  {
+   "role": "model",
+   "path": "enth/model.enth.intgemm.alphas.bin",
+   "bytes": 31561787
+  },
+  {
+   "role": "lex",
+   "path": "enth/lex.50.50.enth.s2t.bin",
+   "bytes": 3016612
+  },
+  {
+   "role": "vocab",
+   "path": "enth/vocab.enth.spm",
+   "bytes": 993517
+  }
+ ]
+}

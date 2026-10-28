@@ -5,7 +5,7 @@ A phone app (installable web app) that says Thai out loud in a male voice. Type 
 ## What it does
 
 - **Thai in → voice out.** Paste or type Thai and a Thai male voice reads it.
-- **English in → Thai out.** English is matched against the phrasebook and your saved phrases first. For anything else, download the optional offline translator in Settings (~900 MB, rougher Thai).
+- **English in → Thai out.** English is matched against the phrasebook and your saved phrases first. For anything else, download the optional offline translator (about 40 MB) — Mozilla's Firefox English→Thai model, running on the phone.
 - **Tone-coloured romanisation** under every phrase (Paiboon-style), with a little pitch line showing each tone.
 - **Slow** replay and **Shadow** mode: it plays the phrase, gives you time to say it back, and repeats.
 - **Phrasebook** of ~70 casual, male-register phrases, with audio built in so they play instantly.
@@ -46,10 +46,10 @@ If you edit `data/phrasebook.json`, new phrases still work — they just use the
 |---|---|---|
 | Voice | Meta MMS-TTS Thai (VITS), converted to ONNX by sherpa-onnx; runs with onnxruntime-web | CC BY-NC 4.0 (non-commercial) |
 | Romanisation | TLTK-style Thai pronunciation lexicon from VachanaTTS | MIT |
-| Translator (optional) | NLLB-200 distilled 600M (8-bit), via Transformers.js, downloaded from Hugging Face on demand | CC BY-NC 4.0 (non-commercial) |
+| Translator (optional) | Mozilla Firefox Translations English→Thai model v2.0 + Bergamot runtime v0.6.0, in `translator/` (fetched and hash-checked by the GitHub Action from `translator/sources.json`) | MPL 2.0 |
 | Fonts | Andika (romanisation), IBM Plex Sans Thai Looped | SIL OFL |
 
-The voice and translator models are licensed for **non-commercial use** — fine for personal learning, not for business use.
+The voice model is licensed for **non-commercial use** — fine for personal learning, not for business use.
 
 ## Limits worth knowing
 

@@ -50,7 +50,7 @@ const CONTOUR = {
 const settings = Object.assign({ slow: 1.6, rounds: 3, male: true }, store.get('tv.settings', {}));
 let saved = store.get('tv.saved', []);
 let phrasebook = { categories: [] };
-let translatorInstalled = store.get('tv.translator', false);
+let translatorInstalled = store.get('tv.translator2', false);
 
 // ---------- voice (worker) ----------
 const worker = new Worker(new URL('./tts-worker.js', import.meta.url), { type: 'module' });
@@ -291,7 +291,8 @@ function alternatives(list) {
 
 async function onSay(e) {
   e?.preventDefault();
-  const text = $('#input').value.trim();
+  const raw = $('#input').value.trim();
+  const text = TT.hasThai(raw) ? TT.cleanThai(raw) : raw;
   if (!text) { $('#input').focus(); return; }
   cancelShadow();
   if (TT.hasThai(text)) {
@@ -311,8 +312,8 @@ async function onSay(e) {
     $('#hint').hidden = true;
     $('#result').replaceChildren(h('div', { class: 'msg' },
       h('p', {}, 'That isn’t in your phrases yet.'),
-      h('p', {}, 'To type any English, download the offline translator in Settings (about 900 MB, once). Or ask Claude for the Thai and import it into Saved.'),
-      h('div', { class: 'row-actions' }, h('button', { class: 'ghost', type: 'button', onclick: openSettings }, 'Open settings')),
+      h('p', {}, 'To type any English, download the offline translator (about 40 MB, once). Or ask Claude for the Thai and import it into Saved.'),
+      h('div', { class: 'row-actions' }, h('button', { class: 'ghost', type: 'button', onclick: () => { openSettings(); installTranslator(); } }, 'Download translator')),
     ));
     if (matches.length) $('#result').append(alternatives(matches));
     return;
@@ -322,7 +323,7 @@ async function onSay(e) {
   const status = h('div', { class: 'msg' }, h('p', {}, translatorLoaded() ? 'Translating…' : 'Loading the translator (first time after opening takes a little while)…'));
   $('#result').replaceChildren(status);
   try {
-    let th = await translate(text);
+    let th = TT.cleanThai(await translate(text));
     if (settings.male) th = TT.maleSpeech(th);
     renderResult({ th, en: text, source: 'Offline translator', warn: 'Machine translation — check important things with a native speaker', alts: matches });
     safePlay(th, false, document.querySelector('.ctl.play'));
@@ -415,11 +416,11 @@ function renderTranslatorStatus(msg) {
   $('#trRemove').hidden = !translatorInstalled;
   st.textContent = msg || (translatorInstalled
     ? 'Downloaded. You can type English anywhere, even offline.'
-    : 'Lets you type any English sentence offline. About 900 MB — use Wi-Fi. Its Thai is rougher than the phrasebook.');
+    : 'Lets you type any English sentence offline. About 40 MB. Its Thai is plainer than the phrasebook.');
 }
 
 async function installTranslator() {
-  if (!confirm('Download the translator now? About 900 MB. Use Wi-Fi and keep the app open until it finishes.')) return;
+  if (!confirm('Download the translator now? About 40 MB.')) return;
   try { await navigator.storage?.persist?.(); } catch { /* ignore */ }
   $('#trInstall').disabled = true; $('#trBarWrap').hidden = false;
   renderTranslatorStatus('Downloading…');
@@ -427,10 +428,10 @@ async function installTranslator() {
     await loadTranslator(({ loaded, total }) => {
       if (total) { $('#trBar').style.width = `${(loaded / total) * 100}%`; $('#trStatus').textContent = `Downloading… ${MB(loaded)} of ${MB(total)}`; }
     });
-    translatorInstalled = true; store.set('tv.translator', true);
+    translatorInstalled = true; store.set('tv.translator2', true);
     renderTranslatorStatus(); toast('Translator ready');
   } catch (err) {
-    renderTranslatorStatus(`Download stopped: ${err.message}. Tap download to try again — finished parts are kept.`);
+    renderTranslatorStatus(`Download stopped: ${err.message}. Tap download to try again.`);
   } finally { $('#trInstall').disabled = false; $('#trBarWrap').hidden = true; }
 }
 
@@ -458,7 +459,7 @@ async function boot() {
   $('#trInstall').addEventListener('click', installTranslator);
   $('#trRemove').addEventListener('click', async () => {
     if (!confirm('Remove the translator from this phone? You can download it again later.')) return;
-    await removeTranslator(); translatorInstalled = false; store.set('tv.translator', false); renderTranslatorStatus(); toast('Translator removed');
+    await removeTranslator(); translatorInstalled = false; store.set('tv.translator2', false); renderTranslatorStatus(); toast('Translator removed');
   });
   $('#importBtn').addEventListener('click', () => { $('#importText').value = ''; $('#importDlg').showModal(); });
   $('#importDlg').addEventListener('close', () => { if ($('#importDlg').returnValue === 'import') importPhrases($('#importText').value); });
@@ -470,7 +471,17 @@ async function boot() {
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredInstall = e; $('#installBtn').hidden = false; });
   $('#installBtn').addEventListener('click', async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; $('#installBtn').hidden = true; });
 
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  if ('serviceWorker' in navigator) {
+    // When an update takes over, reload once so the new version is what's on screen
+    const hadController = !!navigator.serviceWorker.controller;
+    let reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (hadController && !reloaded) { reloaded = true; location.reload(); }
+    });
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+  // Clean up the old 900 MB translator (v1) if it's still on the phone
+  try { caches.delete('transformers-cache'); } catch { /* ignore */ }
 
   const [lex, pb, pre] = await Promise.all([
     fetch('data/lexicon.tsv').then((r) => r.text()),
