@@ -1,0 +1,30 @@
+{
+  "about": "Firefox Translations (Mozilla) English to Thai model v2.0 and the Bergamot runtime v0.6.0. MPL-2.0. Downloaded and hash-checked by .github/fetch_translator.py.",
+  "files": [
+    {
+      "dest": "translator/bergamot-translator.wasm",
+      "url": "https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/translations-wasm/05082c31-aee8-4249-9e01-c1865afd7520.wasm",
+      "sha256": "a3a89d9ad0a4ed8f27bf3e403701b23f5709816f6376438503f2fa5b0182c2dc"
+    },
+    {
+      "dest": "translator/bergamot-translator.js",
+      "url": "https://raw.githubusercontent.com/mozilla-firefox/firefox/48d55cf7ec80093903e2ef7f58b61a84a22ef716/toolkit/components/translations/bergamot-translator/bergamot-translator.js",
+      "sha256": "faff1ef6285b0d26f01787776fd49299dfb756ecb9688aa990c250e66797b47d"
+    },
+    {
+      "dest": "translator/enth/model.enth.intgemm.alphas.bin",
+      "url": "https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/translations-models/20260522192810--5cccab3e-c1fb-4de9-b2a1-607dc2280cb2--f3cb18dc-47f6-4ad8-bede-9319e0e6c88c.bin",
+      "sha256": "80e326097655fca75f841130da3338a849aa245374e1616448bcf37b9523a05a"
+    },
+    {
+      "dest": "translator/enth/lex.50.50.enth.s2t.bin",
+      "url": "https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/translations-models/20260522192813--1deee5a6-eaef-4499-9443-20093491c48e--6300f5fe-62db-4288-8c14-7f1cee1b6a97.bin",
+      "sha256": "6961ce07f38e6c113a70855706aa7cad4cc828f986d1751c33f14699f885a2e8"
+    },
+    {
+      "dest": "translator/enth/vocab.enth.spm",
+      "url": "https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/translations-models/20260522192803--a787bf34-c470-405e-a69c-83fa1f38afe4--bf006223-e68d-4785-b86a-040edbb6a6a4.spm",
+      "sha256": "5deff7093d558768f8c22406449202e27595f023cc383a2b66beed240ed46443"
+    }
+  ]
+}
